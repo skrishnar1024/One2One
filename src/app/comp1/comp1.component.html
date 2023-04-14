@@ -1,0 +1,19 @@
+<h1>comp1 works!</h1>
+<hr>
+<button (click)="handleIncrement()">Increment</button>
+<button (click)="handleDecrement()" [disabled]="disableDecremnt">Decrement</button>
+<p>{{counter}}</p>
+<hr>
+<p>Increment/Decrement using ngIf</p>
+<button (click)="handleIncrement()">Increment</button>
+<button *ngIf="counter >0" (click)="handleDecrement()">Decrement</button>
+<p>{{counter}}</p>
+<hr>
+<p>TO DO</p>
+<input type="text" [(ngModel)]="curTask">
+<button (click)="addToDo()">Add</button>
+<!--<ul>
+    <li *ngFor="let task of toDos">{{task}}</li>
+</ul>
+<hr> -->
+<app-comp2 *ngFor="let task of toDos" [task]="task" (deleteTask)="deleteTask($event)" ></app-comp2>

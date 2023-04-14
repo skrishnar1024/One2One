@@ -1,0 +1,9 @@
+<input type="text" [(ngModel)]="inputTask">
+<button (click)="addTask()">Add Task</button>
+
+<ul>
+    <li *ngFor="let task of myToDos">{{task.task}}</li>
+</ul>
+<hr>
+<app-todo-item *ngFor="let task of myToDos" [toDoItemTask]="task"
+></app-todo-item>

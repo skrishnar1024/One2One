@@ -1,0 +1,9 @@
+<p>This is Counter App</p>
+<h1>{{count}}</h1>
+<button (click)="increment()">Increment</button>
+<button (click)="decrement()" *ngIf="showDecrement">Decrement</button>
+<hr>
+<ul>
+    <li *ngFor="let temp of currentColors">{{temp}}</li>
+</ul>
+<button (click)="updateCurrentColors()">Next</button>
