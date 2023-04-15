@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -7,9 +6,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 })
 export class TodoComponent {
 
-  constructor(){
-
-  }
+constructor(){}
 
   myToDos: Array<{ id: number, task: string, status: string }> = [];
   currentPageToDos:  Array<{ id: number, task: string, status: string }> = [];

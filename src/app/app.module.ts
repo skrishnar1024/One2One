@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { CounterComponent } from './counter/counter.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +15,8 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
