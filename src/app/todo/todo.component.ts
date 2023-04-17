@@ -40,19 +40,19 @@ export class TodoComponent implements OnInit {
   }
 
   updatedListPerPage():void {
-    let topItem = (this.page - 1) * 3;
-    let lastItem = topItem + 3;
+    let topItem: number = (this.page - 1) * 3;
+    let lastItem: number = topItem + 3;
     this.currentPageTodos = this.myToDos.slice(topItem, lastItem);
   }
 
-  previous() {
+  previous(): void {
     if (this.page > 1) {
       this.page--;
       this.updatedListPerPage();
     }
   }
 
-  next() {
+  next(): void {
     this.totalPages = Math.ceil(this.myToDos.length / 3);
     if (this.page < this.totalPages) {
       this.page++;
