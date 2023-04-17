@@ -1,41 +1,61 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { toDoService } from '../toDo.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['./todo.component.css'],
+  providers: [toDoService],
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
+  myToDos: Array<{ id: number; task: string; status: string }> = [];
 
-constructor(){}
-
-  myToDos: Array<{ id: number, task: string, status: string }> = [];
-  currentPageToDos:  Array<{ id: number, task: string, status: string }> = [];
   inputTask = '';
-  taskId = 0;
-  taskIndex=0;
-  page=1;
-  previousPageDisable=false;
-  nextPageDisable=false;
+  page = 1;
+  currentPageTodos = [];
+  totalPages = 0;
+  constructor(
+    private toDoService: toDoService,
+    private httpClient: HttpClient
+  ) {}
+
+  ngOnInit(): void {
+    this.myToDos = this.toDoService.myToDos;
+  }
 
   addTask() {
-    this.myToDos.push({ id: this.taskId++, task: this.inputTask, status:'TODO' });
+    this.toDoService.addTask(this.inputTask);
+    this.inputTask = '';
+
+    //call some API
+
+    this.httpClient
+      .get('https://dummyjson.com/products11')
+      .subscribe((response) => {
+        console.log(response);
+      });
+
+    this.updatedListPerPage();
   }
 
-  taskCompleted(eventData) {
-    let index = this.myToDos.findIndex(element => element.id === eventData.id);
-    //this.myToDos.splice(index, 1);
-    let completedTask= this.myToDos[index];
-    this.myToDos.splice(index, 1, { ...completedTask, status: 'DONE' });
+  updatedListPerPage() {
+    let topItem = (this.page - 1) * 3;
+    let lastItem = topItem + 3;
+    this.currentPageTodos = this.myToDos.slice(topItem, lastItem);
   }
-  
-  nextPage(){
-    this.page++;
 
-    
-  }
-  previousPage(){
-    this.page--;
-
+  previous() {
+    if (this.page > 1) {
+      this.page--;
+      this.updatedListPerPage();
     }
-}
+  }
 
+  next() {
+    this.totalPages = Math.ceil(this.myToDos.length / 3);
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.updatedListPerPage();
+    }
+  }
+}

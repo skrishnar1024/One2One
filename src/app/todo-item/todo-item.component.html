@@ -1,7 +1,6 @@
 <div>
-    <p>{{ toDoItemTask.task }}</p>
-     <p [ngClass]="{'status-todo': toDoItemTask.status == 'TODO', 'status-done': toDoItemTask.status == 'DONE'}"> {{toDoItemTask.status }}
-    </p>
-    <button (click)="completedTask()">Done</button>
-  </div>
-  
+  <p>{{ toDoItemTask.task }}</p>
+  <p [ngStyle]="{ color: toDoItemTask.status == 'TODO'? 'red': 'green'    }">{{ toDoItemTask.status }}</p>
+  <button (click)="ChangeStatus()">Done</button>
+
+</div>

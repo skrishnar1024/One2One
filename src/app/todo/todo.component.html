@@ -1,8 +1,9 @@
-<input type="text" [(ngModel)]="inputTask">
+<input type="text" [(ngModel)]="inputTask" />
 <button (click)="addTask()">Add Task</button>
-
-<hr>
-<app-todo-item *ngFor="let task of myToDos| slice:(page-1)*3:page*3" [toDoItemTask]="task" (deleteTaskEvent)="taskCompleted($event)"
+<hr />
+<app-todo-item
+  *ngFor="let task of currentPageTodos"
+  [toDoItemTask]="task"
 ></app-todo-item>
-<button (click)="previousPage()" class="btn" [disabled]="page===1">PREVIOUS</button>
-<button (click)="nextPage()" class="btn" [disabled]="page*3 >= myToDos.length ">NEXT</button>
+<button (click)="previous()" [disabled]="page == 1">Previous</button>
+<button (click)="next()" [disabled]="page >= myToDos.length / 3">Next</button>
