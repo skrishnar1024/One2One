@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { toDoService } from '../toDo.service';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-todo-item',
@@ -9,7 +10,7 @@ import { toDoService } from '../toDo.service';
 
 export class TodoItemComponent {
 
-  @Input() toDoItemTask: { id: number, task: string, status: string };
+  @Input() toDoItemTask: Task;
 
 
   constructor(private toDoService: toDoService)

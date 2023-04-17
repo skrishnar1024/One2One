@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { toDoService } from '../toDo.service';
 import { HttpClient } from '@angular/common/http';
+import { Task } from '../task';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -8,12 +9,12 @@ import { HttpClient } from '@angular/common/http';
   providers: [toDoService],
 })
 export class TodoComponent implements OnInit {
-  myToDos: Array<{ id: number; task: string; status: string }> = [];
+  myToDos: Array<Task> = [];
+  inputTask: string = '';
+  page: number = 1;
+  currentPageTodos: Task[];
+  totalPages: number = 0;
 
-  inputTask = '';
-  page = 1;
-  currentPageTodos = [];
-  totalPages = 0;
   constructor(
     private toDoService: toDoService,
     private httpClient: HttpClient
@@ -23,7 +24,7 @@ export class TodoComponent implements OnInit {
     this.myToDos = this.toDoService.myToDos;
   }
 
-  addTask() {
+  addTask():void {
     this.toDoService.addTask(this.inputTask);
     this.inputTask = '';
 
@@ -38,7 +39,7 @@ export class TodoComponent implements OnInit {
     this.updatedListPerPage();
   }
 
-  updatedListPerPage() {
+  updatedListPerPage():void {
     let topItem = (this.page - 1) * 3;
     let lastItem = topItem + 3;
     this.currentPageTodos = this.myToDos.slice(topItem, lastItem);
